@@ -58,8 +58,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 bot.sendMessage({
                     to: channelID,
                     message: bio
-                })
+                });
                 break;
+            case 'savagedickpic':
+                bot.sendMessage({
+                    to: channelID,
+                    message: "http://3.bp.blogspot.com/-oqwTL8ny-yo/Tfj67Ipc8xI/AAAAAAAAAoo/CZXBUBQoWd8/s1600/SavageBlog.jpg"
+                });
             default:
                 break;
          }
