@@ -1,0 +1,16 @@
+{
+  "name": "savagebot",
+  "version": "1.0.0",
+  "description": "A Macho Man Randy Savage discord bot.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "Nick Bohannan",
+  "license": "MIT",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "dotenv": "^8.0.0",
+    "winston": "^3.2.1"
+  }
+}
