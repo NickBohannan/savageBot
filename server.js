@@ -1,10 +1,15 @@
 require('dotenv').config()
 const Discord = require('discord.io');
 const logger = require('winston');
+const fetch = require('node-fetch');
 
 const quotes = require('./quotes.js')
 const pics = require('./pics.js')
 const bio = require('./bio.js')
+
+function fahrenheit(kelvin) {
+    return Math.floor((kelvin - 273) * (9/5) + 32)
+}
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -65,6 +70,19 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: "http://3.bp.blogspot.com/-oqwTL8ny-yo/Tfj67Ipc8xI/AAAAAAAAAoo/CZXBUBQoWd8/s1600/SavageBlog.jpg"
                 });
+            case 'savageweather':
+                    fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${args[0]},us&appid=${process.env.APIKEY}`)
+                        .then(w => w.json())
+                        .then(weatherJSON => {
+                            console.log(weatherJSON)
+                            
+                            let wString = `OOOOOOH YEAH! You want the weather, PUMPKIN?! WELL HERE YOU GO. It's ${fahrenheit(weatherJSON.main.temp)} °F right now in ${weatherJSON.name} and the cream RIIIIISES to the TOP of ${fahrenheit(weatherJSON.main.temp_max)} °F and lets check the sky... ${weatherJSON.weather[0].main}!`
+                            
+                            bot.sendMessage({
+                                to: channelID,
+                                message: wString
+                            }) 
+                        })
             default:
                 break;
          }
